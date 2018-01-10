@@ -22,7 +22,7 @@ public class Player {
 
         //queue some rocket research on turn 1
         if(gc.round()==1){
-            gc.queueResearch(bc.UnitType.Rocket ) //M. idk if this is the right way to call queueResearch(UnitType branch)
+            gc.queueResearch(bc.UnitType.Rocket); //M. idk if this is the right way to call queueResearch(UnitType branch)
         }
 
         System.out.println("Current round: "+gc.round()); //M. It's it nice to have a computer that will talk to you?
