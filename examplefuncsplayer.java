@@ -1,6 +1,6 @@
 // import the API.
-// See https://s3.amazonaws.com/battlecode-2018/api/java/index.html for the javadocs.
-// Mason thinks we'll get SDK soon... like when the client is released
+//M. See https://s3.amazonaws.com/battlecode-2018/api/java/index.html for the javadocs.
+//M. Mason (Ubbiout) thinks we'll get SDK soon... like when the client is released
 import bc.*;
 
 public class Player {
@@ -32,9 +32,10 @@ public class Player {
             // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
             VecUnit units = gc.myUnits();
             for (int i = 0; i < units.size(); i++) { //M. for each unit in our immutable units vector
-                Unit unit = units.get(i);
+                Unit unit = units.get(i); //M. we got that unit object right here
 
                 // Most methods on gc take unit IDs, instead of the unit objects themselves.
+                //M. isMoveReady(int robot_id)  tests if heat is sufficiently low
                 if (gc.isMoveReady(unit.id()) && gc.canMove(unit.id(), Direction.Southeast)) {
                     gc.moveRobot(unit.id(), Direction.Southeast);
                 }
@@ -44,3 +45,31 @@ public class Player {
         }
     }
 }
+
+void moveToLocation(UnitId, MapLocation){ //M. naieve moveToward(UnitId, MapLoc)
+  
+}
+
+/* looks like the only map right now has no deposit on it LOL
+public location locateInitialKarboniteDeposits(){
+  //M. loop through bc.startingMap(bc.Planet.Earth) and check each with initialKarboniteAt(x and y) or probably not bc.karboniteAt(MapLocation location)
+  //initialize vector of locations here
+    VecMapLocation karbLoc;
+  for (int i = 0; i < bc.startingMap(bc.Planet.Earth).width(); i++) {
+     for (int j = 0; j < bc.startingMap(bc.Planet.Earth).height(); i++) {
+       if(initialKarboniteAt(i,j) > 0){
+         //save location into vector
+       }
+  }
+  //return vector of locations with karbonite deposits
+}
+
+so we could totally build a factory
+research rockets
+build a rocket
+eventually finish building it
+load workers into its garrison
+fly it to mars
+and figure out how to write a mars program cuz wtf mate
+
+*/
