@@ -69,7 +69,7 @@ public class Player {
                     Unit unit = units.get(i);
                     if (gc.karbonite() >= (300 / 4)) { //M. 300/4 is blueprint cost of factory. factory max hp/4
                         System.out.println("Construct Blueprint: " + unit.id());
-                        if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) {
+                        //if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) { //M. this fucking stops us
                             System.out.println("Unit: " + unit.id() + " attempts to construct");
                             try {
                                 System.out.println("Blueprint exists!");
@@ -78,7 +78,7 @@ public class Player {
                                 System.err.println("Exception caught: " + e.getMessage()); //gerald here
                                 e.printStackTrace();
                             }//M. end of catch()
-                        }
+                        //}
                     }
                     //if(gc.canBuild(unit.id(), need blueprint_id here)){ //M.idk what a blueprint_id is
 
