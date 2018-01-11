@@ -62,22 +62,23 @@ public class Player {
             }
 
             //build a factory on round 3
-            while (gc.round() >= 3 || gc.round() < 4) { //M. just build factories forever lol... on the same square
+            while (gc.round() < 5) { //M. just build factories forever lol... on the same square
                 System.out.println("Current round: " + gc.round() + " let's build a factory with " + gc.karbonite());
                 VecUnit units = gc.myUnits();
                 for (int i = 0; i < units.size(); i++) { //M. all the workers/units will try to do the same thing
                     Unit unit = units.get(i);
                     if (gc.karbonite() >= (300 / 4)) { //M. 300/4 is blueprint cost of factory. factory max hp/4
                         System.out.println("Construct Blueprint: " + unit.id());
-                        //if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) {
-                        try {
-                            System.out.println("Blueprint here");
-                            gc.blueprint(unit.id(), UnitType.Factory, Direction.South);
-                        } catch (Exception e) { //M. end of try()
-                            System.err.println("Exception caught: " + e.getMessage()); //gerald here
-                            e.printStackTrace();
-                        }//M. end of catch()
-                        //}
+                        if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) {
+                            System.out.println("Unit: " + unit.id() + " attempts to construct");
+                            try {
+                                System.out.println("Blueprint exists!");
+                                gc.blueprint(unit.id(), UnitType.Factory, Direction.South);
+                            } catch (Exception e) { //M. end of try()
+                                System.err.println("Exception caught: " + e.getMessage()); //gerald here
+                                e.printStackTrace();
+                            }//M. end of catch()
+                        }
                     }
                     //if(gc.canBuild(unit.id(), need blueprint_id here)){ //M.idk what a blueprint_id is
 
