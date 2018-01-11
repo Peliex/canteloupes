@@ -46,9 +46,9 @@ public class Player {
     }
 }
 
-void moveToLocation(UnitId, MapLocation){ //M. naieve moveToward(UnitId, MapLoc)
+//void moveToLocation(int UnitID, MapLocation){ //M. naieve moveToward(UnitId, MapLoc)
   
-}
+//}
 
 /* looks like the only map right now has no deposit on it LOL
 public location locateInitialKarboniteDeposits(){
