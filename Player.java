@@ -32,7 +32,7 @@ public class Player {
                 gc.queueResearch(UnitType.Rocket); //M. research some rocket!
             }
 
-            while (gc.round() <= 6) { //M. why can't this be an if statement?
+            while (gc.round() <= 1) { //M. why can't this be an if statement?
                 System.out.println("Current round: " + gc.round());
                 // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
                 VecUnit units = gc.myUnits();
@@ -44,9 +44,9 @@ public class Player {
                         gc.moveRobot(unit.id(), Direction.West);
                     }
                 }
-                gc.nextTurn(); //M. this is all we will do on turn 1-5
+                gc.nextTurn(); //M. this is all we will do on turn 1
             }
-            while (gc.round() <= 8) { //M. why can't this be an if statement?
+            while (gc.round() <= 2) { //M. why can't this be an if statement?
                 System.out.println("Current round: " + gc.round());
                 // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
                 VecUnit units = gc.myUnits();
@@ -61,16 +61,23 @@ public class Player {
                 gc.nextTurn(); //M. this is all we will do on turn 1-5
             }
 
-            //build a factory on round 6
-            while (gc.round() >= 9) { //M. just build factories forever lol... on the same square
-                System.out.println("Current round: " + gc.round() + " let's build a factory");
+            //build a factory on round 3
+            while (gc.round() >= 3 || gc.round() < 4) { //M. just build factories forever lol... on the same square
+                System.out.println("Current round: " + gc.round() + " let's build a factory with " + gc.karbonite());
                 VecUnit units = gc.myUnits();
                 for (int i = 0; i < units.size(); i++) { //M. all the workers/units will try to do the same thing
                     Unit unit = units.get(i);
                     if (gc.karbonite() >= (300 / 4)) { //M. 300/4 is blueprint cost of factory. factory max hp/4
-                        if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) {
+                        System.out.println("Construct Blueprint: " + unit.id());
+                        //if (gc.canBlueprint(unit.id(), UnitType.Worker, Direction.South)) {
+                        try {
+                            System.out.println("Blueprint here");
                             gc.blueprint(unit.id(), UnitType.Factory, Direction.South);
-                        }
+                        } catch (Exception e) { //M. end of try()
+                            System.err.println("Exception caught: " + e.getMessage()); //gerald here
+                            e.printStackTrace();
+                        }//M. end of catch()
+                        //}
                     }
                     //if(gc.canBuild(unit.id(), need blueprint_id here)){ //M.idk what a blueprint_id is
 
