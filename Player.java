@@ -28,10 +28,11 @@ public class Player {
         try {//M. just for testing purposes, the following code isn't smart and really only works on default map as blue
             //M. let's do some rocket research!
             if (gc.round() == 1) {
+                System.out.println("Current round: " + gc.round() + " let's research a rocket!");
                 gc.queueResearch(UnitType.Rocket); //M. research some rocket!
             }
 
-            while (gc.round() <= 5) { //M. move away from start location... with examplefuncplayer code
+            while (gc.round() <= 6) { //M. why can't this be an if statement?
                 System.out.println("Current round: " + gc.round());
                 // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
                 VecUnit units = gc.myUnits();
@@ -43,11 +44,25 @@ public class Player {
                         gc.moveRobot(unit.id(), Direction.West);
                     }
                 }
+                gc.nextTurn(); //M. this is all we will do on turn 1-5
+            }
+            while (gc.round() <= 8) { //M. why can't this be an if statement?
+                System.out.println("Current round: " + gc.round());
+                // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
+                VecUnit units = gc.myUnits();
+                for (int i = 0; i < units.size(); i++) {
+                    Unit unit = units.get(i);
 
+                    // Most methods on gc take unit IDs, instead of the unit objects themselves.
+                    if (gc.isMoveReady(unit.id()) && gc.canMove(unit.id(), Direction.South)) {
+                        gc.moveRobot(unit.id(), Direction.South);
+                    }
+                }
+                gc.nextTurn(); //M. this is all we will do on turn 1-5
             }
 
             //build a factory on round 6
-            if (gc.round() > 5) { //M. just build factories forever lol... on the same square
+            while (gc.round() >= 9) { //M. just build factories forever lol... on the same square
                 System.out.println("Current round: " + gc.round() + " let's build a factory");
                 VecUnit units = gc.myUnits();
                 for (int i = 0; i < units.size(); i++) { //M. all the workers/units will try to do the same thing
@@ -61,16 +76,19 @@ public class Player {
 
                     //}
                 }
+                // Submit the actions we've done, and wait for our next turn.
+                gc.nextTurn(); //M. if we get to this point... end our turn
             }
-
+            System.out.println("Current round: " + gc.round() + " I got past everything!");
+            // Submit the actions we've done, and wait for our next turn.
+            gc.nextTurn(); //M. if we get to this point... end our turn
 
         } catch (Exception e) { //M. end of try()
             System.err.println("Exception caught: " + e.getMessage()); //gerald here
             e.printStackTrace();
         }//M. end of catch()
 
-        // Submit the actions we've done, and wait for our next turn.
-        gc.nextTurn();
+
     }//M. end of main()
 } //M. end of Player
 
