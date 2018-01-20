@@ -21,6 +21,8 @@ public class Astar
     private static int numOpened = 0;
     private static int numClosed = 0;
 
+
+
     static int CalculateHeuristic(GOAP.WorldState fr, GOAP.WorldState to)
     {
         final long care = (to.dontcare ^ -1L);
@@ -51,8 +53,52 @@ public class Astar
         return -1;
     }
 
-    /*int AstarPlan(GOAP.ActionPlanner ap, GOAP.WorldState start, GOAP.WorldState goal, String plan, GOAP.WorldState worldstates, int plansize)
+    static void ReconstructPlan(GOAP.ActionPlanner ap, AstarNode goalnode, String plan, GOAP.WorldState worldstates, int plansize)
     {
+        AstarNode curnode = goalnode;
+        int idx = plansize - 1;
+        int numsteps = 0;
+        while(curnode != null && curnode.ActionName != null)
+        {
 
-    }*/
+        }
+    }
+
+    int AstarPlan(GOAP.ActionPlanner ap, GOAP.WorldState start, GOAP.WorldState goal, String plan, GOAP.WorldState worldstates, int plansize)
+    {
+        numOpened = 0;
+        AstarNode n0 = new AstarNode();
+        n0.ws = start;
+        n0.parentws = start;
+        n0.g = 0;
+        n0.h = CalculateHeuristic(start, goal);
+        n0.f = n0.g + n0.h;
+        n0.ActionName = "";
+        opened[numOpened++] = n0;
+        numClosed=0;
+
+        do
+        {
+            if(numOpened == 0) {System.err.println("Didn't find a path"); return -1; }
+            int lowestIdx = -1;
+            int lowestVal = Integer.MAX_VALUE;
+            for(int i=0; i<numOpened; ++i)
+            {
+                if(opened[i].f < lowestVal)
+                {
+                    lowestVal = opened[i].f;
+                    lowestIdx = i;
+                }
+            }
+            AstarNode cur = opened[lowestIdx];
+            if(numOpened != 0) opened[lowestIdx] = opened[numOpened-1];
+            numOpened--;
+            final long care = (goal.dontcare ^ -1L);
+            final boolean match = ((cur.ws.value & care) == (goal.value & care));
+            if(match)
+            {
+
+            }
+        }
+    }
 }
